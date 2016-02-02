@@ -10,16 +10,16 @@
 #import "SMVViewController.h"
 
 @interface ViewController ()
-@property (nonatomic) UINavigationController *navigationController;
+
 @end
 
 @implementation ViewController
 
 - (void)viewDidAppear:(BOOL)animated {
     SMVViewController *viewController = [SMVViewController new];    
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    [self.navigationController setToolbarHidden:NO animated:YES];
-    [self presentViewController:self.navigationController animated:YES completion:nil];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [navigationController setToolbarHidden:NO animated:YES];
+    [self presentViewController:navigationController animated:YES completion:nil];
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 

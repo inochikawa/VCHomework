@@ -12,8 +12,13 @@
 @implementation SMVViewController
 
 - (void)createViewController {
-    SMVViewController *viewController = [SMVViewController new];
-    [self.navigationController pushViewController:viewController animated:YES];
+    if (!self.navigationController) {
+        NSLog(@"Error - navigationController = nil");
+    }
+    else {
+        SMVViewController *viewController = [SMVViewController new];
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
 }
 
 - (void)changeBackgroundColorOnViewController {
