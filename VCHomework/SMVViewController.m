@@ -37,14 +37,27 @@
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 - (void)didAnimateFirstHalfOfRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+    [super didAnimateFirstHalfOfRotationToInterfaceOrientation:toInterfaceOrientation];
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 - (void)willAnimateFirstHalfOfRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [super willAnimateFirstHalfOfRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+- (void)loadView {
+    [super loadView];
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
