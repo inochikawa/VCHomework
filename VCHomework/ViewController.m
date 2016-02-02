@@ -8,7 +8,6 @@
 
 #import "ViewController.h"
 #import "SMVViewController.h"
-#import "UIColor+Utility.h"
 
 @interface ViewController ()
 @property (nonatomic) UINavigationController *navigationController;
@@ -16,41 +15,11 @@
 
 @implementation ViewController
 
-- (void)changeBackgroundColorOnViewController {
-    UIViewController *visibleViewController = [self.navigationController visibleViewController];    
-    visibleViewController.view.backgroundColor = [UIColor randomColor];
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-}
-
-- (void)dropToRootViewController {
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-}
-
-- (void)createViewController {
-    SMVViewController *viewController = [SMVViewController new];
-    viewController.view = [[UIView alloc] initWithFrame:self.view.frame];
-    viewController.view.backgroundColor = [UIColor greenColor];
-    viewController.title = [NSString stringWithFormat:@"VC - %lu", (unsigned long)self.navigationController.viewControllers.count];
-    
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"Create VC - %lu", (unsigned long)self.navigationController.viewControllers.count + 1] style:UIBarButtonItemStylePlain target:self action:@selector(createViewController)];
-    
-    UIBarButtonItem *dropButton = [[UIBarButtonItem alloc] initWithTitle:@"Drop" style:UIBarButtonItemStylePlain target:self action:@selector(dropToRootViewController)];
-    
-    UIBarButtonItem *randomColorButton = [[UIBarButtonItem alloc] initWithTitle:@"Change color" style:UIBarButtonItemStylePlain target:self action:@selector(changeBackgroundColorOnViewController)];
-    
-    viewController.navigationItem.rightBarButtonItem = rightButton;
-    [viewController setToolbarItems:@[randomColorButton, dropButton] animated:YES];
-    
-    [self.navigationController pushViewController:viewController animated:YES];
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-}
-
 - (void)viewDidAppear:(BOOL)animated {
-    self.navigationController = [[UINavigationController alloc] init];
+    SMVViewController *viewController = [SMVViewController new];    
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     [self.navigationController setToolbarHidden:NO animated:YES];
     [self presentViewController:self.navigationController animated:YES completion:nil];
-    [self createViewController];
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
@@ -73,26 +42,6 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-}
-
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-}
-
-- (void)didAnimateFirstHalfOfRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
-    [super didAnimateFirstHalfOfRotationToInterfaceOrientation:toInterfaceOrientation];
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-}
-
-- (void)willAnimateFirstHalfOfRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    [super willAnimateFirstHalfOfRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 

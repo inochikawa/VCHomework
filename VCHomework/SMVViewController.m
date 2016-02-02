@@ -7,8 +7,30 @@
 //
 
 #import "SMVViewController.h"
+#import "UIColor+Utility.h"
 
 @implementation SMVViewController
+
+- (void)createViewController {
+    SMVViewController *viewController = [SMVViewController new];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (void)changeBackgroundColorOnViewController {
+    self.view.backgroundColor = [UIColor randomColor];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+- (void)dropToRootViewController {
+    if (!self.navigationController) {
+        NSLog(@"Error - navigationController = nil");
+    }
+    else {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        NSLog(@"%s", __PRETTY_FUNCTION__);
+    }
+}
+
 
 - (void)viewDidAppear:(BOOL)animated {
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -16,6 +38,25 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if (!self.navigationController) {
+        NSLog(@"Error - navigationController = nil");
+        return;
+    }
+    
+    self.view = [[UIView alloc] initWithFrame:self.view.frame];
+    self.view.backgroundColor = [UIColor greenColor];
+    self.title = [NSString stringWithFormat:@"VC - %lu", (unsigned long)self.navigationController.viewControllers.count];
+    
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"Create VC - %lu", (unsigned long)self.navigationController.viewControllers.count + 1] style:UIBarButtonItemStylePlain target:self action:@selector(createViewController)];
+    
+    UIBarButtonItem *dropButton = [[UIBarButtonItem alloc] initWithTitle:@"Drop" style:UIBarButtonItemStylePlain target:self action:@selector(dropToRootViewController)];
+    
+    UIBarButtonItem *randomColorButton = [[UIBarButtonItem alloc] initWithTitle:@"Change color" style:UIBarButtonItemStylePlain target:self action:@selector(changeBackgroundColorOnViewController)];
+    
+    self.navigationItem.rightBarButtonItem = rightButton;
+    [self setToolbarItems:@[randomColorButton, dropButton] animated:YES];
+    
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
